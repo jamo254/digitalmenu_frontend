@@ -1,16 +1,21 @@
 import { toast } from 'react-toastify';
 
-export function signIn(username, password) {
-    return fetch("/auth/token/login/", {
-        method: "Post",
+export function request(path, {data = null, token = null, method = "GET"}) {
+    return fetch(path, {
+        method,
         headers: {
+            Authorization: token ? `Token ${token}` : "",
+            
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({ username, password })
+        body: method !== "GET" && method !== "DELETE" ? JSON.stringify(data) : null,
     })
         .then((response) => {
             console.log(response)
             if (response.ok) {
+                if (method === "DELETE") {
+                    return true;
+                }
                 return response.json()
             }
             //If there is an error
@@ -18,7 +23,7 @@ export function signIn(username, password) {
                 //Handle error from server
                 if (response.status === 400) {
                     const errors = Object.keys(json).map(
-                        (k) => `[${k}]: $(json[k].join(" "))`
+                        (k) => ` ${(json[k].join(" "))}`
                     );
                     throw new Error(errors.join(" "))
                 }
@@ -32,12 +37,39 @@ export function signIn(username, password) {
                     throw new Error(e);
             })
         })
-        .then((json) => {
-            //Call api successful
-            toast(JSON.stringify(json), { type: "success" })
-        })
+       
         .catch((e) => {
         //Handle all errors
             toast(e.message, { type: "error" });
     })
+}
+
+
+
+//User Login API
+export function signIn(username, password) {
+    return request("auth/token/login/", {
+        data: { username, password },
+        method: "POST",
+    })
+}
+
+
+
+//Registering new user
+export function register(username, password) {
+    return request("auth/users/", {
+        data: { username, password },
+        method: "POST",
+    })
+}
+
+export function fetchPlaces(token) {
+    return request("/api/places/", { token });
+
+}
+
+export function addPlaces(data,token) {
+    return request("/api/places/", {data, token, method:"POST" });
+
 }
