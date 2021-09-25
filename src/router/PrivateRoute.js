@@ -13,14 +13,14 @@ function PrivateRoute({ children, ...rest }) {
                 auth.token ? (
                     children
                 ) : (
-                        <Redirect
-                            to={ {
-                                pathname: '/login',
-                                state: {from: location},
-                          }}
-                        />
+                    <Redirect
+                        to={ {
+                            pathname: '/login',
+                            state: { from: location },
+                        } }
+                    />
                 )
-             ) }
+            ) }
         />
     )
 }

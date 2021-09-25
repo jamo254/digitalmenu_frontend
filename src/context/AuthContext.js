@@ -4,7 +4,8 @@ import { signIn as signInApi, register as registerApi } from '../router/apis';
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    const [token, setToken] = useState("");
+    //Passing the token to local storage
+    const [token, setToken] = useState(localStorage.getItem("token"));
     const [loading, setLoading] = useState(false);
 
     const signIn = async (username, password, callback) => {

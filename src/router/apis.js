@@ -45,7 +45,6 @@ export function request(path, {data = null, token = null, method = "GET"}) {
 }
 
 
-
 //User Login API
 export function signIn(username, password) {
     return request("auth/token/login/", {
@@ -55,7 +54,6 @@ export function signIn(username, password) {
 }
 
 
-
 //Registering new user
 export function register(username, password) {
     return request("auth/users/", {
@@ -63,13 +61,27 @@ export function register(username, password) {
         method: "POST",
     })
 }
-
+//Fetching places api
 export function fetchPlaces(token) {
     return request("/api/places/", { token });
 
 }
-
+//adding places api
 export function addPlaces(data,token) {
     return request("/api/places/", {data, token, method:"POST" });
 
+}
+
+//Setting up functioon to connect to cloudinary
+export function uploadImage(image) {
+    const formData = new FormData();
+    formData.append("file", image);
+    formData.append("upload_preset", "qrmenu_photos");
+
+    return fetch("https://api.cloudinary.com/v1_1/jamocode/image/upload", {
+        method: "POST",
+        body: formData,
+    }).then((response) => {
+        return response.json();
+    });
 }

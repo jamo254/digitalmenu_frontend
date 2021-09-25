@@ -14,12 +14,12 @@ function Login() {
     const history = useHistory();
     const auth = useContext(AuthContext);
 
-useEffect(() => {
-    if (auth.token) {
-       history.replace('/places') 
-    }
+    useEffect(() => {
+        if (auth.token) {
+            history.replace('/places')
+        }
     
-}, [])
+    });
 
     const onClick = () => {
         auth.signIn(username, password, () => history.replace("/places"));
@@ -41,7 +41,8 @@ useEffect(() => {
                                     value={ username }
                                     onChange={ e => setUsername(e.target.value) }
                                 />
-
+                            </Form.Group>
+                            <Form.Group>
                                 <Form.Label>Password</Form.Label>
                                 <Form.Control
                                     type="password"
@@ -49,23 +50,25 @@ useEffect(() => {
                                     value={ password }
                                     onChange={ e => setPassword(e.target.value) }
                                 />
-                                <Button variant="standard" block onClick={ onClick } disabled={ auth.loading }>
-                                    { auth.loading ? (
-                                        <Spinner
-                                            variant="standard"
-                                            as="span"
-                                            animation="border"
-                                            size="sm"
-                                            role="status"
-                                            aria-hidden="true"
-                                        />
-                                    ) : (
-                                        "Sign In"
-                                    )
-                                    }
-                                
-                                </Button>
+                               
                             </Form.Group>
+                            <Button variant="standard" block onClick={ onClick } disabled={ auth.loading }>
+                                { auth.loading ? (
+                                    <Spinner
+                                        variant="standard"
+                                        as="span"
+                                        animation="border"
+                                        size="sm"
+                                        role="status"
+                                        aria-hidden="true"
+                                    />
+                                ) : (
+                                    "Sign In"
+                                )
+                                }
+
+                            </Button>
+                            
                         </Card.Body>
                     </Card>
                 </Col>
