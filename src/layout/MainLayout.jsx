@@ -28,7 +28,7 @@ const MainLayout = ({ children }) => {
     return (
         <>
             <Navbar bg="light" variant="light" className="b-4">
-                <Navbar.Brand>QR Menu</Navbar.Brand>
+                <Navbar.Brand href="/">QR Menu</Navbar.Brand>
                 <Nav>
                     <Nav.Link onClick={ goToPlaces }>Places</Nav.Link>
                 </Nav>

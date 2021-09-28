@@ -4,6 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register.jsx';
+import Place from './pages/Place';
 
 import Places from './pages/Places';
 import { AuthProvider } from './context/AuthContext';
@@ -26,7 +27,10 @@ function App() {
             <Register />
           </Route>
 
-          
+          <PrivateRoute exact path='/places/:id'>
+            <Place />
+          </PrivateRoute>
+
           <PrivateRoute exact path='/places'>
             <Places />
           </PrivateRoute>

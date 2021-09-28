@@ -78,6 +78,8 @@ const PlaceForm = ({ onDone }) => {
                 />
             </Form.Group>
 
+            
+
             <Form.Group>
                 <Form.Label>Image</Form.Label>
                 <ImageDropzone value={ image } onChange={ setImage } />
