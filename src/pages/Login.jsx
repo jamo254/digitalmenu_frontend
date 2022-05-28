@@ -31,7 +31,7 @@ function Login() {
                     <Card>
                         <Card.Body>
                             <h3 className="text-center">
-                                <b>LOGIN</b>
+                                <b>LOGIN.</b>
                             </h3>
                             <Form.Group>
                                 <Form.Label>Username</Form.Label>
